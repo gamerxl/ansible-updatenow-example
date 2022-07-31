@@ -1,0 +1,25 @@
+- name: Update servers
+  hosts: all
+  tasks:
+    # Updates all ubuntu servers with apt-get update and upgrade.
+    - name: 'Update ubuntu server'
+      block:
+      - name: 'Update ubuntu server'
+        become: yes
+        apt:
+          force_apt_get: yes
+          update_cache: yes
+          upgrade: 'yes'
+      when:
+        - ansible_distribution == 'Ubuntu'
+
+    # Updates all alpine servers with apk update and upgrade.
+    - name: 'Update alpine server'
+      block:
+      - name: 'Update alpine server'
+        become: yes
+        apk:
+          update_cache: yes
+          upgrade: yes
+      when:
+        - ansible_distribution == 'Alpine'

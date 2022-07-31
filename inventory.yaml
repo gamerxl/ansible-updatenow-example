@@ -1,0 +1,24 @@
+# `domain` has to be replaced by an internal name of the hypervisor.
+domain:
+  #
+  hosts:
+    # `domain-example-a` has to be replaced by an internal name of the server.
+    domain-example-a:
+      # `192.168.0.100` has to be replaced by the internal ip of the server.
+      ansible_host: 192.168.0.100
+
+    # `domain-example-b` has to be replaced by an internal name of the server.
+    domain-example-b:
+      # `192.168.0.101` has to be replaced by the internal ip of the server.
+      ansible_host: 192.168.0.101
+
+    # and so further on..
+
+  # Setup ansible variables for ssh jump and
+  # python interpreter lookup behaviour for our hosts above.
+  vars:
+    # `ansible@domain.local` has to be replaced by your `username@hostname`.
+    # It is recommended to have an ansible user named `ansible` on the machines where you run ansible.
+    # The ansible user must be also on the servers with the public ssh key noted in the `README.md`.
+    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q ansible@domain.local"'
+    ansible_python_interpreter: auto_silent
